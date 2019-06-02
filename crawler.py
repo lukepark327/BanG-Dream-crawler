@@ -38,13 +38,13 @@ def set_tag(file_name, image):
                 mime_type="image/png")
             audiofile.tag.save()
     except AttributeError:
-        print("NO SONG")
+        print("!NO SONG")
 
 
 if __name__ == "__main__":
     ROOT_1_1 = "https://bestdori.com/assets/"
-    ROOT_1_2_en = "en"
     ROOT_1_2_jp = "jp"
+    ROOT_1_2_en = "en"
     ROOT_1_2_tw = "tw"
     ROOT_1_3 = "/sound/"
     # https://bestdori.com/assets/jp/sound/bgm194_rip/bgm194.mp3
@@ -55,10 +55,12 @@ if __name__ == "__main__":
     
     ROOT_2 = "https://bestdori.com/info/songs/"
 
-    # 1~1001
-    for id in range(1, 1002):
+    # 1~199
+    # 1000~1001
+    for id in range(1, 199):
         PATH_2 = ROOT_2 + str(id)
         req = requests.get(PATH_2)
+        req.encoding = req.apparent_encoding
         html = req.text
 
         # Get title
@@ -74,7 +76,7 @@ if __name__ == "__main__":
         else:
             title = title[1:-1]
 
-            for ROOT_1_2 in [ROOT_1_2_en, ROOT_1_2_jp, ROOT_1_2_tw]:
+            for ROOT_1_2 in [ROOT_1_2_jp, ROOT_1_2_en, ROOT_1_2_tw]:
                 try:
                     # EN
                     PATH_1 = ROOT_1_1 + ROOT_1_2 + ROOT_1_3 + "bgm" + "%03d" % id + "_rip/bgm" + "%03d" % id + ".mp3"
