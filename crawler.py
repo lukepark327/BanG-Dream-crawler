@@ -6,17 +6,18 @@ import random
 from time import sleep
 
 
-def download(url, file_name):
+def download(url, file_name, test=False):
     with open(file_name, "wb") as file:  # open in binary mode
         response = get(url)  # get request
         content = response.content
         file.write(content)  # write to file
 
-    # if not decide(file_name):
-    #     os.remove(file_name)
+    if test and not is_mp3(file_name):
+        # os.remove(file_name)
+        raise TypeError
 
 
-def decide(file_name):
+def is_mp3(file_name):
     audiofile = eyed3.load(file_name)
     try:
         audiofile.tag
@@ -26,27 +27,36 @@ def decide(file_name):
 
 
 def set_tag(file_name, image):
-    audiofile = eyed3.load(file_name)
+    try:
+        audiofile = eyed3.load(file_name)
 
-    with open(image, "rb") as file:  # open in binary mode
-        audiofile.initTag()
-        audiofile.tag.images.set(
-            type_=3,
-            img_data=file.read(),
-            mime_type="image/png")
-        audiofile.tag.save()
+        with open(image, "rb") as file:  # open in binary mode
+            audiofile.initTag()
+            audiofile.tag.images.set(
+                type_=3,
+                img_data=file.read(),
+                mime_type="image/png")
+            audiofile.tag.save()
+    except AttributeError:
+        print("NO SONG")
 
 
 if __name__ == "__main__":
-    ROOT_1 = "https://bestdori.com/assets/en/sound/"
+    ROOT_1_1 = "https://bestdori.com/assets/"
+    ROOT_1_2_en = "en"
+    ROOT_1_2_jp = "jp"
+    ROOT_1_2_tw = "tw"
+    ROOT_1_3 = "/sound/"
     # https://bestdori.com/assets/jp/sound/bgm194_rip/bgm194.mp3
     # https://bestdori.com/assets/jp/sound/bgm001_rip/bgm001.mp3
     # https://bestdori.com/assets/en/sound/bgm1001_rip/bgm1001.mp3
     # et al.
+    # jp, en, tw
+    
     ROOT_2 = "https://bestdori.com/info/songs/"
 
     # 1~1001
-    for id in range(1, 1002):
+    for id in range(176, 1002):
         PATH_2 = ROOT_2 + str(id)
         req = requests.get(PATH_2)
         html = req.text
@@ -62,10 +72,17 @@ if __name__ == "__main__":
             print(id, ">>> !SKIP")
             continue
         else:
-            PATH_1 = ROOT_1 + "bgm" + "%03d" % id + "_rip/bgm" + "%03d" % id + ".mp3"
-
             title = title[1:-1]
-            download(PATH_1, "./songs/" + title + ".mp3")
+
+            for ROOT_1_2 in [ROOT_1_2_en, ROOT_1_2_jp, ROOT_1_2_tw]:
+                try:
+                    # EN
+                    PATH_1 = ROOT_1_1 + ROOT_1_2 + ROOT_1_3 + "bgm" + "%03d" % id + "_rip/bgm" + "%03d" % id + ".mp3"
+                    download(PATH_1, "./songs/" + title + ".mp3", test=True)
+                    break
+                except TypeError:
+                    # os.remove("./songs/" + title + ".mp3")
+                    pass
 
         # Get art
         target = 'image content='
