@@ -56,7 +56,7 @@ if __name__ == "__main__":
     ROOT_2 = "https://bestdori.com/info/songs/"
 
     # 1~1001
-    for id in range(176, 1002):
+    for id in range(1, 1002):
         PATH_2 = ROOT_2 + str(id)
         req = requests.get(PATH_2)
         html = req.text
