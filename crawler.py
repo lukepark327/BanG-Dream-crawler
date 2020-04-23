@@ -88,7 +88,7 @@ if __name__ == "__main__":
             continue
         else:
             title = title[1:-1]  # remove quotes marks
-            title.replace("/", "-")  # prevent wrong file name
+            title = title.replace("/", "-")  # prevent wrong file name
 
             for ROOT_1_2 in [ROOT_1_2_jp, ROOT_1_2_en, ROOT_1_2_tw]:
                 try:
