@@ -28,7 +28,7 @@ python crawler.py --end=200
 ```
 
 # TODO
-- [ ] Being able to download only album art.
+- [ ] Being able to download album art only.
 
 # Contact
 :email: lukepark327@gmail.com
