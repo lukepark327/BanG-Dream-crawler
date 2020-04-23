@@ -27,5 +27,8 @@ For example:
 python crawler.py --end=200
 ```
 
-## Contact
+# TODO
+- [ ] Being able to download only album art.
+
+# Contact
 :email: lukepark327@gmail.com
