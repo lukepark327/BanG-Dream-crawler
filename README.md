@@ -2,7 +2,7 @@
 BanG Dream! songs crawler from Bestdori.
 
 ## Abstract
-Auto download BanG Dream! songs from Bestdori(https://bestdori.com)
+Auto download BanG Dream! songs from Bestdori (https://bestdori.com) .
 
 ![](./example.png)
 
