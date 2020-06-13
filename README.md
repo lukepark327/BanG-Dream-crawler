@@ -7,6 +7,12 @@ Auto download BanG Dream! songs from Bestdori (https://bestdori.com) .
 ![](./example.png)
 
 ## How to Use
+
+### Install requirements
+```bash
+python install -r requirements.txt
+```
+
 ```bash
 python crawler.py -h
 ```

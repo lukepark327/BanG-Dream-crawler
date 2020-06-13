@@ -1,0 +1,16 @@
+certifi==2020.4.5.2
+chardet==3.0.4
+dataclasses==0.7
+deprecation==2.1.0
+eyeD3==0.9.5
+filetype==1.0.7
+get==2019.4.13
+idna==2.9
+packaging==20.4
+post==2019.4.13
+public==2019.4.13
+pyparsing==2.4.7
+query-string==2019.4.13
+requests==2.23.0
+six==1.15.0
+urllib3==1.25.9

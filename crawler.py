@@ -15,7 +15,7 @@ def download(url, file_name, test=False):
         file.write(content)  # write to file
 
     if test and not is_mp3(file_name):
-        # os.remove(file_name)
+        # os.remove(file_name)2
         raise TypeError
 
 
@@ -81,6 +81,10 @@ if __name__ == "__main__":
         idx_start = html.find(target)
         idx_end = html[idx_start:].find('>')
         title = html[idx_start + len(target):idx_start + idx_end]
+
+        if os.path.exists("./songs/" + title[1:-1] + ".mp3"):
+            print(">>> " + title + " alreay exists")
+            continue
 
         # Save MP3.
         if title == "Bestdori!":
